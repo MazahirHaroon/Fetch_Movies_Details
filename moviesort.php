@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MovieSort</title>
+  <title>SeriesSort</title>
   <link rel="stylesheet" href="css/bootstrap.css" />
   <link rel="stylesheet" href="line.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,12 +35,12 @@ if ( @fopen("https://www.google.com", "r") )
 
 ?>
 
-<body background="cinemabg.jpg">
+<body background="cinema2.jpg">
 <?php
 // define variables and set to empty values
 $path = $list1 = "";
 $req1 = array();
-$movienrating1 = array();
+$Seriesnrating1 = array();
 //Err
 $pathErr = $list1Err = "";
 
@@ -57,7 +57,7 @@ function test_input($data) {
 <div class="container-fluid">
 <div class="row">
   <div class="col-sm-12">
-<center><h1 style='color:white;font-size:90px;font-family:Bungee Inline, cursive;'>MovieSort</h1></center>
+<center><h1 style='color:white;font-size:90px;font-family:Bungee Inline, cursive;'>SeriesSort</h1></center>
 </div>
 </div>
 
@@ -111,8 +111,8 @@ function test_input($data) {
                        Help</button>
                        <div class="collapse" id="collapseExample1">
                         <div class="card card-block">
-                          Copy & Paste the path to the folder where you have saved all your movies,
-                          'For eg: /home/movies'. And we will dispaly the details of all the movies
+                          Copy & Paste the path to the folder where you have saved all your Series,
+                          'For eg: /home/Series'. And we will dispaly the details of all the Series
                            present in it in tabular format.
                         </div>
                         </div>
@@ -140,7 +140,7 @@ function test_input($data) {
                   <center>
                       <form method = "post"  action = " <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> ">
                         <div class="inline">
-                      <label for="usr" style="color:white;grey;font-size:25px;">Enter the movie names: </label>
+                      <label for="usr" style="color:white;grey;font-size:25px;">Enter the series episodes: </label>
                       <input type="text" name="list1" class="validate" value = "<?php echo htmlspecialchars($list1);?>"  />
                       <span class="error"><?php echo $list1Err;?></span>
                     </div>
@@ -154,9 +154,9 @@ function test_input($data) {
                        <div class="collapse" id="collapseExample2">
                         <div class="card card-block">
                           <p>
-                          Enter the names of movies of which you need
+                          Enter the names of Series episodes of which you need
                            the details, separated by ++
-                          For eg: 'FightClub++Manichitrathazhu++Roja'
+                          For eg: 'SherlockAStudyinPink++CrossingLinesS1E3++TBBTS5E3FightClub++Manichitrathazhu++Roja'
                           <p>
                         </div>
                         </div>
@@ -208,7 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           sleep(2);
           ?>
           <script>
-          window.location = "moviesort.php";
+          window.location = "Seriesort.php";
           </script>
           <?php
       }
@@ -228,14 +228,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-            <title>Utopia-MovieSort</title>
+            <title>Utopia-Seriesort</title>
 
             <!-- Bootstrap -->
             <link href="bootstrap.css" rel="stylesheet">
 
         <?php
 
-        //link for the directory of movies
+        //link for the directory of Series
         ini_set('max_execution_time', 2400);
         ini_set('user_agent','Mozilla/4.0(compatible;MSIE 6.0)');
         //from html form
@@ -350,6 +350,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //cleaning the url
         $string=explode("=", $e->href);
         $string=$string[1]; // piece1
+        $string=explode("/epcast", $string);
+        $string=$string[0]; // piece1
         $string=explode("/&", $string);
         $string=$string[0]; // piece1
 
@@ -360,10 +362,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <?php
         //if there is folder then add a details.txt there
-        //$myfile = fopen('C:/Users/user/Videos/Movies/Yet/' .$file1. '/Details.txt', "ab") or die("Unable to open file!");
+        //$myfile = fopen('C:/Users/user/Videos/Series/Yet/' .$file1. '/Details.txt', "ab") or die("Unable to open file!");
 
         //else add in the main folder along with video file with same name
-        //$myfile = fopen('C:\Users\Mazu\Videos\Movies\Movie '.$filename.'.txt', "a") or die("Unable to open file!");
+        //$myfile = fopen('C:\Users\Mazu\Videos\Series\Movie '.$filename.'.txt', "a") or die("Unable to open file!");
 
         //fwrite($myfile, "\r\n");
 
@@ -561,7 +563,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <br>
         <center>
         <table>
-        <tr><td><a href="moviesort.php"><button>Back</button></a></td></tr>
+        <tr><td><a href="seriessort.php"><button>Back</button></a></td></tr>
         </table>
       </center>
 </div>
@@ -578,7 +580,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
            sleep(2);
            ?>
            <script>
-           window.location = "moviesort.php";
+           window.location = "Seriesort.php";
            </script>
            <?php
          }
@@ -632,6 +634,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
  <?php
+ $list1=str_replace(" ","",$list1);
  $list = explode("++", $list1);
  $len = count($list);
  for($i=0; $i<$len; $i++){
@@ -663,6 +666,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  //cleaning the url
  $string=explode("=", $e->href);
  $string=$string[1]; // piece1
+ $string=explode("/epcast", $string);
+ $string=$string[0]; // piece1
  $string=explode("/&", $string);
  $string=$string[0]; // piece1
 
@@ -701,7 +706,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  //fwrite($myfile, "\r\n");
  $name77=$name;
  $current = array($rating => $name);
- $movienrating1 = array_merge($movienrating, $current);
+ $Seriesnrating1 = array_merge($Seriesnrating, $current);
  ?>
  <!--12
  $buffer=substr($buffer,1,12);-->
@@ -870,8 +875,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  </tr>
  <tr>
    <?php
- krsort($movienrating1);
- foreach ($movienrating1 as $key => $value) {
+ krsort($Seriesnrating1);
+ foreach ($Seriesnrating1 as $key => $value) {
      echo "<td>".$key."</td>";
      echo "<td>".$value."</td></tr>";
  }
@@ -882,7 +887,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <br>
  <center>
  <table>
- <tr><td><a href="moviesort.php"><button>Back</button></a></td></tr>
+ <tr><td><a href="seriessort.php"><button>Back</button></a></td></tr>
  </table>
 </center>
 </div>
@@ -922,7 +927,7 @@ else
   <div class="col-sm-4">
   <center>
   <h1 style="color:white">But you must have an active internet connection to enjoy this functionality.</h1>
-  <a href="moviesort.php"><button>Reload</button></a>
+  <a href="Seriessort.php"><button>Reload</button></a>
   </center>
   </div>
 
