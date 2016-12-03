@@ -111,9 +111,11 @@ function test_input($data) {
                        Help</button>
                        <div class="collapse" id="collapseExample1">
                         <div class="card card-block">
+                          <p style="color:black;font-size:15px;background-color:white">
                           Copy & Paste the path to the folder where you have saved all your movies,
                           'For eg: /home/movies'. And we will dispaly the details of all the movies
                            present in it in tabular format.
+                         </p>
                         </div>
                         </div>
                       </center>
@@ -153,7 +155,7 @@ function test_input($data) {
                        <div class="inline">
                        <div class="collapse" id="collapseExample2">
                         <div class="card card-block">
-                          <p>
+                          <p style="color:black;font-size:15px;background-color:white">
                           Enter the names of movies of which you need
                            the details, separated by ++
                           For eg: 'FightClub++Manichitrathazhu++Roja'
