@@ -1,9 +1,9 @@
 # MovieSort
 A program to categorise and sort the movies according to the  public rating and different categories in one’s PC with the details scraped from internet. 
-First Page
+##First Page
 ![Screenshot of the program](https://github.com/MazahirHaroon/MovieSort/blob/master/MovieSort.png)
 
-Output :
+##Example Output :
 ![Screenshot of the program](https://github.com/MazahirHaroon/MovieSort/blob/master/MovieSort2.png)
 
 Two ways available : 
