@@ -35,7 +35,7 @@ if ( @fopen("https://www.google.com", "r") )
 
 ?>
 
-<body background="cinema2.jpg">
+<body background="cinemabg.jpg">
 <?php
 // define variables and set to empty values
 $path = $list1 = "";
@@ -561,7 +561,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <br>
         <center>
         <table>
-        <tr><td><a href="utopia.php"><button>Back</button></a></td></tr>
+        <tr><td><a href="moviesort.php"><button>Back</button></a></td></tr>
         </table>
       </center>
 </div>
@@ -882,7 +882,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <br>
  <center>
  <table>
- <tr><td><a href="utopia.php"><button>Back</button></a></td></tr>
+ <tr><td><a href="moviesort.php"><button>Back</button></a></td></tr>
  </table>
 </center>
 </div>
