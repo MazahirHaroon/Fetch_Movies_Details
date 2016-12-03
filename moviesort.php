@@ -35,7 +35,7 @@ if ( @fopen("https://www.google.com", "r") )
 
 ?>
 
-<body background="cinema2.jpg">
+<body background="cinemag.jpg">
 <?php
 // define variables and set to empty values
 $path = $list1 = "";
