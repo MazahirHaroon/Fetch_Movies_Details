@@ -60,26 +60,9 @@ function test_input($data) {
 <center><h1 style='color:white;font-size:90px;font-family:Bungee Inline, cursive;'>MovieSort</h1></center>
 </div>
 </div>
-
 <div class="container">
 <?php ob_start(); ?>
-
-
-
-<div id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="row">
-  <div class="col-sm-12">
-  <div class="card">
-    <div class="card-header" role="tab" id="headingOne">
-      <h5 class="mb-0">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-        <center><h1 style='color:grey;font-size:30px;font-family:Ranga, cursive;'><button>Get Details</button></h1></center>
-        </a>
-      </h5>
-    </div>
-
-    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-      <div class="card-block">
+<br><br>
 
 
         <div id="accordion" role="tablist" aria-multiselectable="true">
@@ -187,14 +170,6 @@ function test_input($data) {
 
 
       </div>
-    </div>
-
-  </div>
-</div>
-
-</div>
-
-</div>
 
 
 
@@ -205,8 +180,11 @@ function test_input($data) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (isset($_POST['sort'])) {
         if (empty($_POST["path"])){
+          ?>
+          <div class="jumbotron">
+            <?php
           $pathErr = "No Path Entered ";
-          echo "<cneter><h2 style='color:white;'>".$pathErr."</center>";
+          echo "<center><h2>".$pathErr."</h2></center>";
           sleep(2);
           ?>
           <script>
@@ -222,51 +200,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         unset($_POST['sort']);
         unset($_POST['path']);
         ?>
-
-        <!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-            <title>Utopia-MovieSort</title>
-
-            <!-- Bootstrap -->
-            <link href="bootstrap.css" rel="stylesheet">
-
-        <?php
-
-        //link for the directory of movies
-        ini_set('max_execution_time', 2400);
-        ini_set('user_agent','Mozilla/4.0(compatible;MSIE 6.0)');
-        //from html form
-        ?>
-        <?php
-
-        //direct assignment
-        //$sdir="C:\Mazahir\movie";
-        ?>
-
-
-          <center>
+        <center>
           <h1> The List </h1>
           </center>
         <div class="jumbotron">
-        <table id="test" border="1" style="margin-left:12px;margin-right:12px;">
-
-         <tr>
-           <th>Rating</th>
-           <th>Name</th>
-           <th>Genre</th>
-           <th>Director</th>
-           <th>Writer</th>
-           <th>Cast</th>
-           <th>Description</th>
-           <th>Release Date</th>
-         </tr>
-
-
         <?php
 
         // Open the directory, and read its contents
@@ -274,6 +211,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //$unwant = array(".srt",".txt");
 
         function listFolderFiles($dir){
+          if (is_dir($dir)) {
+            ?>
+            <table id="test" border="1" style="margin-left:12px;margin-right:12px;">
+             <tr>
+               <th>Rating</th>
+               <th>Name</th>
+               <th>Genre</th>
+               <th>Director</th>
+               <th>Writer</th>
+               <th>Cast</th>
+               <th>Description</th>
+               <th>Release Date</th>
+             </tr>
+<?php
             $files = scandir($dir);
             foreach($files as $file){
                 if($file != '.' && $file != '..'){
@@ -557,6 +508,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         }
         }
+        else{
+          echo "<center><h2>Directory path '". $dir. "' has some issues</h2></center>";
+        }
+        }
+
+
 
         listFolderFiles($sdir);
         ?></table>
@@ -573,10 +530,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  }
  }
  if(isset($_POST['sortlist'])) {
-
+          ?>
+          <div class="jumbotron">
+            <?php
          if (empty($_POST["list1"])) {
            $list1Err = "Please enter some movie names";
-           echo "<cneter><h2 style='color:white;'>".$list1Err."</center>";
+           echo "<center><h2>".$list1Err."</h2></center>";
+          ?> </div> <?php
            sleep(2);
            ?>
            <script>
@@ -597,28 +557,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
  // your script code goes here
  ?>
-
- <!DOCTYPE html>
- <html lang="en">
-   <head>
-     <meta charset="utf-8">
-     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-     <title>MovieSort</title>
-
-     <!-- Bootstrap -->
-     <link href="bootstrap.css" rel="stylesheet">
-
- <?php
- ini_set('max_execution_time', 2400);
- ini_set('user_agent','Mozilla/4.0(compatible;MSIE 6.0)');
-?>
-
+ <div class="jumbotron">
  <center>
  <h1> The List </h1>
  </center>
-<div class="jumbotron">
 <table id="test" border="1" style="margin-left:12px;margin-right:12px;">
 
 <tr>
@@ -703,8 +645,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  //fwrite($myfile, $name);
  //fwrite($myfile, "\r\n");
  $name77=$name;
- $current = array($rating => $name);
- $movienrating1 = array_merge($movienrating, $current);
+ //$current = array($rating => $name);
+ //$movienrating1 = array_merge($movienrating, $current);
  ?>
  <!--12
  $buffer=substr($buffer,1,12);-->
@@ -861,7 +803,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  }
  }
  ?></table>
- ?></table>
+ <!--
  <center>
    Sorted Based on Rating
  </center>
@@ -873,14 +815,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  </tr>
  <tr>
    <?php
- krsort($movienrating1);
- foreach ($movienrating1 as $key => $value) {
-     echo "<td>".$key."</td>";
-     echo "<td>".$value."</td></tr>";
- }
+ //krsort($movienrating1);
+ //foreach ($movienrating1 as $key => $value) {
+//     echo "<td>".$key."</td>";
+//     echo "<td>".$value."</td></tr>";
+ //}
  ?>
 </table>
-</center>
+</center>-->
 <br>
 <br>
  <center>
