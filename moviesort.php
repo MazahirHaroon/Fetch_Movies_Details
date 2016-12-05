@@ -27,7 +27,10 @@ if ( @fopen("https://www.google.com", "r") )
 {
   //error handler function
   function customError($errno, $errstr) {
-    echo "<b>Error:</b> [$errno] $errstr";
+    $log = fopen("errorlog.txt", "w") or die("Unable to open file!");
+    $error = "<b>Error:</b> [$errno] $errstr";
+    fwrite($log, $error);
+    fclose($log);
   }
 
   //set error handler
@@ -204,6 +207,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <h1> The List </h1>
           </center>
         <div class="jumbotron">
+          <table id="test" border="1" style="margin-left:12px;margin-right:12px;">
+           <tr>
+             <th>Rating</th>
+             <th>Name</th>
+             <th>Genre</th>
+             <th>Director</th>
+             <th>Writer</th>
+             <th>Cast</th>
+             <th>Description</th>
+             <th>Release Date</th>
+           </tr>
         <?php
 
         // Open the directory, and read its contents
@@ -212,19 +226,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         function listFolderFiles($dir){
           if (is_dir($dir)) {
-            ?>
-            <table id="test" border="1" style="margin-left:12px;margin-right:12px;">
-             <tr>
-               <th>Rating</th>
-               <th>Name</th>
-               <th>Genre</th>
-               <th>Director</th>
-               <th>Writer</th>
-               <th>Cast</th>
-               <th>Description</th>
-               <th>Release Date</th>
-             </tr>
-<?php
             $files = scandir($dir);
             foreach($files as $file){
                 if($file != '.' && $file != '..'){
@@ -509,6 +510,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         }
         else{
+          ob_end_clean();
           echo "<center><h2>Directory path '". $dir. "' has some issues</h2></center>";
         }
         }
